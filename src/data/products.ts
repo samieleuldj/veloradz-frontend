@@ -1,3 +1,5 @@
+import type { CollectionSlug } from './collections';
+
 export type ProductCategory = 'daily' | 'crossbody' | 'tote' | 'evening';
 
 export type ProductReview = {
@@ -19,6 +21,8 @@ export type Product = {
   features: string[];
   images?: string[];
   /** Handbag taxonomy */
+  collection?: CollectionSlug;
+  bestSeller?: boolean;
   category?: ProductCategory;
   material?: string;
   dimensions?: string;

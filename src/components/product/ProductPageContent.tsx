@@ -10,6 +10,7 @@ import ProductSocialProof from '@/components/product/ProductSocialProof';
 import SupportedBrandsBar from '@/components/product/SupportedBrandsBar';
 import VehiclePresetBanner from '@/components/product/VehiclePresetBanner';
 import BagSpecs from '@/components/product/BagSpecs';
+import { getCollection } from '@/data/collections';
 import type { Product, ProductReview } from '@/data/products';
 import {
   BAG_TRUST_POINTS,
@@ -39,6 +40,7 @@ export default function ProductPageContent({
   vehiclePreset = null,
 }: Props) {
   const isBag = Boolean(product.category || product.material);
+  const collection = product.collection ? getCollection(product.collection) : undefined;
   const problemText = product.problemText || DEFAULT_PROBLEM_TEXT;
   const solutionText = product.solutionText || DEFAULT_SOLUTION_TEXT;
   const trustPoints = product.requiresVehicleInfo
@@ -49,13 +51,21 @@ export default function ProductPageContent({
   const showUrgencyBanner = product.id === 'knee-red-light-massager';
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-24">
+    <div className="bg-background min-h-screen pb-24">
       {!hideBreadcrumb && (
-        <div className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
-            <a href="/" className="hover:text-primary transition-colors">الرئيسية</a>
+        <div className="bg-cream border-b border-gold/15">
+          <div className="container mx-auto px-4 py-3 text-xs uppercase tracking-[0.2em] text-muted flex items-center gap-2" dir="ltr">
+            <a href="/" className="hover:text-gold-dark transition-colors">Accueil</a>
+            {collection && (
+              <>
+                <span>/</span>
+                <a href={`/collection/${collection.slug}`} className="hover:text-gold-dark transition-colors">
+                  {collection.name}
+                </a>
+              </>
+            )}
             <span>/</span>
-            <span className="text-gray-800 font-medium">{product.name}</span>
+            <span className="text-primary">{product.name}</span>
           </div>
         </div>
       )}
@@ -147,15 +157,7 @@ export default function ProductPageContent({
             {product.requiresVehicleInfo && <SupportedBrandsBar />}
 
             <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 mt-8">
-              {isBag ? (
-                <div className="mb-8">
-                  <h2 className="text-2xl font-black text-text mb-3">لماذا هاد الحقيبة؟</h2>
-                  <p className="text-gray-600 text-lg leading-relaxed">{product.description}</p>
-                  <div className="mt-6">
-                    <BagSpecs product={product} />
-                  </div>
-                </div>
-              ) : (
+              {isBag ? null : (
                 <>
                   <div className="mb-10">
                     <div className="flex items-center gap-3 mb-4">
@@ -243,7 +245,7 @@ export default function ProductPageContent({
                     <div className="text-3xl">{item.icon}</div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">{item.title}</h4>
-                      <p className="text-blue-100 text-sm">{item.desc}</p>
+                      <p className="text-cream/70 text-sm">{item.desc}</p>
                     </div>
                   </div>
                 ))}

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { Cairo } from 'next/font/google';
+import { Cairo, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import SiteChrome from '@/components/layout/SiteChrome';
 import MetaPixel from '@/components/layout/MetaPixel';
@@ -17,6 +17,11 @@ import {
 } from '@/lib/seo';
 
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-serif',
+});
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -56,7 +61,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" className="scroll-smooth">
-      <body className={`${cairo.className} flex flex-col min-h-screen`}>
+      <body className={`${cairo.className} ${cormorant.variable} flex flex-col min-h-screen`}>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <MetaPixel />
         <TrackingPixels />

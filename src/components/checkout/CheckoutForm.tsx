@@ -146,15 +146,15 @@ export default function CheckoutForm({
   const whatsAppOrderUrl = useMemo(() => {
     const vehicle = vehicleLabel;
     const lines = [
-      'سلام، بغيت نطلب موكات عازلة للكابو (3900 دج — COD).',
-      vehicle ? `سيارتي: ${vehicle}` : 'ماركة/موديل سيارتي: ',
+      `سلام، بغيت نطلب ${productName} (${price} دج — الدفع عند الاستلام).`,
+      vehicle ? `سيارتي: ${vehicle}` : '',
       wilaya ? `الولاية: ${wilaya}` : '',
       customerName.trim() ? `الاسم: ${customerName.trim()}` : '',
       phone.trim() ? `الهاتف: ${phone.trim()}` : '',
     ].filter(Boolean);
     const text = encodeURIComponent(lines.join('\n'));
     return `${STORE_WHATSAPP_URL}?text=${text}`;
-  }, [vehicleLabel, wilaya, customerName, phone]);
+  }, [vehicleLabel, wilaya, customerName, phone, productName, price]);
 
   const openWhatsAppOrder = () => {
     trackLead({ productId, productName, price: unitPrice, quantity });

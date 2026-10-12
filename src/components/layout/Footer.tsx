@@ -9,14 +9,15 @@ import { storeBrand } from '@/lib/store-brand';
 
 export default function Footer() {
   return (
-    <footer className="bg-text text-white pt-12 pb-6">
+    <footer className="bg-primary text-cream pt-12 pb-6 border-t border-gold/30">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-2xl font-black mb-4">
+            <h3 className="font-serif text-3xl tracking-[0.15em] mb-1" dir="ltr">
               {storeBrand.logoPrimary}{' '}
-              <span className="text-secondary">{storeBrand.logoSecondary}</span>
+              <span className="text-gold text-base tracking-[0.4em]">{storeBrand.logoSecondary}</span>
             </h3>
+            <p className="font-serif italic text-gold-light mb-4" dir="ltr">L&apos;élégance à portée de main</p>
             <p className="text-gray-400 leading-relaxed mb-4">{storeBrand.description}</p>
           </div>
 
@@ -24,7 +25,8 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2 inline-block">روابط سريعة</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/" className="hover:text-secondary transition-colors">الرئيسية</Link></li>
-              <li><Link href="/#products" className="hover:text-secondary transition-colors">الحقائب</Link></li>
+              <li><Link href="/#collections" className="hover:text-secondary transition-colors">Collections</Link></li>
+              <li><Link href="/#best-sellers" className="hover:text-secondary transition-colors">Les plus vendus</Link></li>
               <li><Link href="/#reviews" className="hover:text-secondary transition-colors">آراء الزبونات</Link></li>
             </ul>
           </div>

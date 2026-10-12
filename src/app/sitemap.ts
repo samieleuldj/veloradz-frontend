@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { collections } from '@/data/collections';
 import { products } from '@/data/products';
 import { getSiteUrl } from '@/lib/seo';
 
@@ -13,11 +14,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1,
     },
+    ...collections.map((c) => ({
+      url: `${siteUrl}/collection/${c.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    })),
     ...products.map((product) => ({
       url: `${siteUrl}/product/${product.id}`,
       lastModified: now,
       changeFrequency: 'weekly' as const,
-      priority: product.id === 'hood-insulation-mat' ? 0.9 : 0.8,
+      priority: 0.8,
     })),
   ];
 }

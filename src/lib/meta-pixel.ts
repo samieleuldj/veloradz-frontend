@@ -1,9 +1,5 @@
 /** Meta Pixel — AYLA BAGS (optional per-product overrides). */
-const PIXEL_BY_PRODUCT: Record<string, string | undefined> = {
-  'ayla-crossbody-sable': process.env.NEXT_PUBLIC_META_PIXEL_ID,
-  'ayla-tote-noir': process.env.NEXT_PUBLIC_META_PIXEL_ID,
-  'ayla-evening-clutch': process.env.NEXT_PUBLIC_META_PIXEL_ID,
-};
+const PIXEL_BY_PRODUCT: Record<string, string | undefined> = {};
 
 export function getMetaPixelIdForProduct(productId: string): string {
   const specific = PIXEL_BY_PRODUCT[productId]?.trim();
@@ -15,7 +11,7 @@ export function getMetaPixelIdForProduct(productId: string): string {
 
 export function getDefaultMetaPixelId(): string {
   const id = (process.env.NEXT_PUBLIC_META_PIXEL_ID || process.env.META_PIXEL_ID || '').trim();
-  return id === 'your_meta_pixel_id' ? '' : id;
+  return id === 'your_meta_pixel_id' || id === '...' ? '' : id;
 }
 
 export function getMetaPixelIdForPath(pathname: string | null): string {

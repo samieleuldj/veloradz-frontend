@@ -1,193 +1,136 @@
-"use client";
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
-import { products, type ProductCategory } from '@/data/products';
-import CartDrawer from '@/components/cart/CartDrawer';
+import BrandMarquee from '@/components/brand/BrandMarquee';
+import CollectionCard from '@/components/brand/CollectionCard';
+import ProductCard from '@/components/brand/ProductCard';
+import { collections } from '@/data/collections';
+import { products } from '@/data/products';
 
-const CATEGORY_FILTERS: { id: 'all' | ProductCategory; label: string }[] = [
-  { id: 'all', label: 'الكل' },
-  { id: 'crossbody', label: 'كروس' },
-  { id: 'tote', label: 'توت' },
-  { id: 'evening', label: 'سهرة' },
+const TRUST_ITEMS = [
+  { title: 'Paiement à la livraison', sub: 'الدفع عند الاستلام' },
+  { title: 'Livraison 58 wilayas', sub: 'توصيل لكل الولايات' },
+  { title: 'Échange 7 jours', sub: 'استبدال خلال 7 أيام' },
+  { title: 'Confirmation WhatsApp', sub: 'تأكيد قبل الإرسال' },
 ];
 
 export default function HomeContent() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<string>('');
-  const [category, setCategory] = useState<'all' | ProductCategory>('all');
-
-  const visibleProducts = useMemo(
-    () =>
-      category === 'all' ? products : products.filter((p) => p.category === category),
-    [category]
-  );
-
-  const handleQuickAdd = (productId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    setSelectedProduct(productId);
-    setIsCartOpen(true);
-  };
+  const bestSellers = products.filter((p) => p.bestSeller);
+  const featured = bestSellers.length > 0 ? bestSellers : products;
 
   return (
-    <div className="flex flex-col">
-      <section className="bg-gradient-to-b from-background to-white py-12 md:py-20">
-        <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-secondary/20 mb-6 text-sm font-bold text-primary">
-            <span className="animate-pulse">🟢</span> حقائب مختارة — AYLA BAGS الجزائر
+    <div className="flex flex-col bg-background">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#FBF7F1_0%,#F6EFE6_55%,#EDE1D0_100%)]" />
+        <div className="relative container mx-auto px-4 pt-10 pb-12 md:pt-14 md:pb-16 text-center" dir="ltr">
+          <div className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden shadow-[0_20px_60px_-20px_rgba(140,106,60,0.45)]">
+            <Image
+              src="/brand/ayla-logo.jpg"
+              alt="AYLA BAGS — L'élégance à portée de main"
+              fill
+              priority
+              className="object-cover scale-[1.08]"
+              sizes="224px"
+            />
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-text mb-4 leading-tight">
-            حقائب <span className="text-accent">تليق بيك</span>
-            <br className="hidden md:block" />
-            {' '}— تشوفي، تستلمي، تدفعي
+          <h1 className="font-serif text-4xl md:text-6xl text-primary mt-8 leading-tight">
+            Maroquinerie <span className="italic text-gold-dark">de luxe</span>
           </h1>
-          <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">
-            كروس، توت، وسهرة — جودة تبان في التفاصيل. الدفع عند الاستلام والتوصيل لـ 58 ولاية.
+          <p className="font-serif italic text-lg md:text-xl text-muted mt-3">
+            Les sacs des grandes maisons, livrés chez vous en Algérie
           </p>
-          <a
-            href="#products"
-            className="inline-block bg-accent hover:bg-accent/90 text-white text-xl font-black py-4 px-12 rounded-xl shadow-[0_8px_20px_-6px_rgba(196,92,62,0.45)] transition-transform active:scale-95"
-          >
-            اكتشفي الحقائب
-          </a>
+          <p className="text-sm text-muted mt-2" dir="rtl">
+            تشوفي الحقيبة قبل ما تخلصي — الدفع عند الاستلام
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mt-8">
+            <a
+              href="#collections"
+              className="bg-primary hover:bg-gold-dark text-cream text-xs uppercase tracking-[0.3em] px-8 py-4 rounded-full transition-colors"
+            >
+              Nos collections
+            </a>
+            <a
+              href="#best-sellers"
+              className="border border-primary/80 hover:border-gold-dark hover:text-gold-dark text-primary text-xs uppercase tracking-[0.3em] px-8 py-4 rounded-full transition-colors"
+            >
+              Les plus vendus
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="border-y border-gray-100 bg-white py-6">
+      <BrandMarquee />
+
+      <section id="collections" className="py-14 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {[
-              { icon: '🤝', label: 'الدفع عند الاستلام' },
-              { icon: '🚚', label: 'توصيل 58 ولاية' },
-              { icon: '🛡️', label: 'ضمان الاستبدال' },
-              { icon: '⭐', label: 'جودة مجربة' },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col items-center justify-center p-2">
-                <div className="text-3xl mb-2">{item.icon}</div>
-                <span className="font-bold text-gray-800 text-sm">{item.label}</span>
-              </div>
+          <div className="text-center mb-10" dir="ltr">
+            <p className="text-[11px] uppercase tracking-[0.4em] text-gold-dark">Les maisons</p>
+            <h2 className="font-serif text-3xl md:text-5xl text-primary mt-2">Choisissez votre collection</h2>
+            <div className="mx-auto mt-4 h-px w-24 bg-gold" />
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+            {collections.map((c) => (
+              <CollectionCard
+                key={c.slug}
+                collection={c}
+                count={products.filter((p) => p.collection === c.slug).length}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      <section id="products" className="py-16 bg-gray-50">
+      <section id="best-sellers" className="py-14 md:py-20 bg-cream border-y border-gold/15">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-black text-text mb-2">مجموعتنا</h2>
-            <p className="text-muted">اختاري الحقيبة اللي تمشي مع أسلوبك</p>
+          <div className="text-center mb-10" dir="ltr">
+            <p className="text-[11px] uppercase tracking-[0.4em] text-gold-dark">Best-sellers</p>
+            <h2 className="font-serif text-3xl md:text-5xl text-primary mt-2">Les plus vendus</h2>
+            <div className="mx-auto mt-4 h-px w-24 bg-gold" />
           </div>
-
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {CATEGORY_FILTERS.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setCategory(item.id)}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
-                  category === item.id
-                    ? 'bg-primary text-white shadow-md'
-                    : 'bg-white text-muted border border-primary/10 hover:border-accent'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {visibleProducts.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col group"
-              >
-                <Link href={`/product/${product.id}`} className="relative block">
-                  {product.badge && (
-                    <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md">
-                      {product.badge}
-                    </div>
-                  )}
-                  <div className="relative aspect-square w-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors overflow-hidden">
-                    {product.images && product.images[0] ? (
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    ) : (
-                      <span className="text-gray-400 font-medium">صورة {product.name}</span>
-                    )}
-                  </div>
-                </Link>
-
-                <div className="p-5 flex flex-col flex-grow">
-                  <Link href={`/product/${product.id}`}>
-                    <h3 className="text-lg font-bold text-text mb-1 hover:text-primary transition-colors line-clamp-2">
-                      {product.name}
-                    </h3>
-                  </Link>
-                  {product.material && (
-                    <p className="text-xs text-muted mb-2 line-clamp-1">{product.material}</p>
-                  )}
-
-                  <div className="flex items-center gap-1 mb-3">
-                    <div className="flex text-yellow-400 text-xs">⭐⭐⭐⭐⭐</div>
-                    <span className="text-xs text-gray-500">
-                      ({product.reviewCount ?? 120}+ تقييم)
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 mb-5 mt-auto pt-4">
-                    <span className="text-2xl font-black text-primary">{product.price} دج</span>
-                    {product.oldPrice && (
-                      <span className="text-gray-400 line-through text-sm">{product.oldPrice} دج</span>
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={(e) => handleQuickAdd(product.id, e)}
-                    className="block w-full text-center bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-colors active:scale-95"
-                  >
-                    أطلبي الآن
-                  </button>
-                </div>
-              </div>
+          <div className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 justify-start md:justify-center">
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} className="snap-start shrink-0 w-[70%] sm:w-[45%] md:w-[30%] lg:w-[23%]" />
             ))}
           </div>
         </div>
       </section>
 
-      <section id="reviews" className="py-16 bg-white border-t border-gray-100">
+      <section className="py-10 bg-primary text-cream">
+        <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {TRUST_ITEMS.map((item) => (
+            <div key={item.title}>
+              <p className="font-serif text-lg text-gold-light" dir="ltr">{item.title}</p>
+              <p className="text-xs text-cream/60 mt-1">{item.sub}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="reviews" className="py-14 md:py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-black text-text mb-8">آراء زبونات AYLA</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-background p-4 rounded-xl border border-primary/10 max-w-xs text-right">
-              <div className="flex text-yellow-400 text-sm mb-2">⭐⭐⭐⭐⭐</div>
-              <p className="text-muted text-sm italic">
-                &quot;الحقيبة كيما في الصور، الخامة مليحة والتغليف محترم.&quot;
-              </p>
-              <span className="block mt-2 font-bold text-sm text-text">- ياسمين، الجزائر</span>
-            </div>
-            <div className="bg-background p-4 rounded-xl border border-primary/10 max-w-xs text-right">
-              <div className="flex text-yellow-400 text-sm mb-2">⭐⭐⭐⭐⭐</div>
-              <p className="text-muted text-sm italic">
-                &quot;COD يطمّن — شفت الحقيبة قبل ما ندفع. توصيل سريع.&quot;
-              </p>
-              <span className="block mt-2 font-bold text-sm text-text">- إيناس، وهران</span>
-            </div>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-gold-dark" dir="ltr">Avis clientes</p>
+          <h2 className="font-serif text-3xl md:text-4xl text-primary mt-2 mb-10" dir="ltr">Elles nous font confiance</h2>
+          <div className="flex gap-4 overflow-x-auto snap-x pb-2 md:justify-center">
+            {[
+              { text: 'الحقيبة كيما في الصور بالضبط، السلسلة ثقيلة والخياطة نظيفة.', name: 'ياسمين — الجزائر' },
+              { text: 'شفت الحقيبة قبل ما نخلص، التغليف فخم ومعاها البوات.', name: 'إيناس — وهران' },
+              { text: 'خدمة راقية واتصلو بيا للتأكيد في نفس النهار.', name: 'سارة — قسنطينة' },
+            ].map((r) => (
+              <div key={r.name} className="snap-start shrink-0 w-[80%] sm:w-80 bg-cream border border-gold/20 rounded-2xl p-6 text-right">
+                <div className="text-gold text-sm mb-3">★★★★★</div>
+                <p className="text-primary/80 text-sm leading-relaxed">{r.text}</p>
+                <p className="mt-4 text-xs font-bold text-gold-dark">{r.name}</p>
+              </div>
+            ))}
           </div>
+          <Link
+            href="/collection/chanel"
+            className="inline-block mt-10 text-xs uppercase tracking-[0.3em] text-primary border-b border-gold pb-1 hover:text-gold-dark"
+            dir="ltr"
+          >
+            Voir la collection Chanel
+          </Link>
         </div>
       </section>
-
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        productId={selectedProduct}
-      />
     </div>
   );
 }
