@@ -1,27 +1,27 @@
 import type { Metadata } from 'next';
 
 export const siteConfig = {
-  name: 'Confort DZ',
-  nameAr: 'كونفور ديزاد',
-  tagline: 'منتجات الراحة في الجزائر',
+  name: 'AYLA BAGS',
+  nameAr: 'آيلا باغز',
+  tagline: 'حقائب نسائية في الجزائر',
   description:
-    'متجر Confort DZ — أجهزة تدليك، عناية، راحة يومية، وموكات عازلة للكابو. الدفع عند الاستلام والتوصيل لـ 58 ولاية.',
+    'AYLA BAGS — حقائب نسائية أنيقة، جودة تبان في التفاصيل. الدفع عند الاستلام والتوصيل لـ 58 ولاية.',
   locale: 'ar_DZ',
   keywords: [
-    'متجر الجزائر',
+    'حقائب نسائية',
+    'حقائب الجزائر',
     'دفع عند الاستلام',
     'توصيل 58 ولاية',
-    'كونفور ديزاد',
-    'Confort DZ',
-    'منتجات الراحة',
-    'جهاز سيلوليت',
-    'موكات الكابو',
+    'AYLA BAGS',
+    'آيلا باغز',
+    'حقيبة كروس',
+    'حقيبة سهرة',
   ],
-  defaultOgImage: '/products/cellulite-device/hero.png',
+  defaultOgImage: '/products/ayla-crossbody-sable/hero.svg',
 };
 
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://confortdz.shop';
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://ayla.shop';
   return url.replace(/\/$/, '');
 }
 

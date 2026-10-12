@@ -1,18 +1,14 @@
 import type { Metadata } from 'next';
 import { DEFAULT_REVIEWS, products } from '@/data/products';
 import { notFound } from 'next/navigation';
-import HoodLandingPage from '@/components/product/HoodLandingPage';
 import ProductPageContent from '@/components/product/ProductPageContent';
 import ProductViewPixel from '@/components/tracking/ProductViewPixel';
 import ExitIntentOffer from '@/components/product/ExitIntentOffer';
 import JsonLd from '@/components/seo/JsonLd';
-import { autoBrand } from '@/lib/store-brand';
 import { buildPageMetadata, productJsonLd, siteConfig } from '@/lib/seo';
 import { getProductWithLivePrice } from '@/lib/product-prices';
 
 export const dynamic = 'force-dynamic';
-
-const HOOD_ID = 'hood-insulation-mat';
 
 export async function generateMetadata({
   params,
@@ -25,42 +21,19 @@ export async function generateMetadata({
   }
 
   const product = await getProductWithLivePrice(base);
-  const brandName = params.id === HOOD_ID ? autoBrand.nameAr : siteConfig.nameAr;
 
   return buildPageMetadata({
-    title: `${product.name} — ${product.price} دج | ${brandName}`,
+    title: `${product.name} — ${product.price} دج | ${siteConfig.nameAr}`,
     description: product.description,
     path: `/product/${product.id}`,
     image: product.images?.[0],
-    keywords: [product.name, brandName, 'دفع عند الاستلام'],
+    keywords: [product.name, siteConfig.nameAr, 'دفع عند الاستلام', 'حقائب نسائية'],
   });
 }
 
-type SearchParams = {
-  car?: string;
-  brand?: string;
-  model?: string;
-};
-
-export default async function ProductPage({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams?: SearchParams;
-}) {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const base = products.find((p) => p.id === params.id);
   if (!base) notFound();
-
-  if (params.id === HOOD_ID) {
-    return (
-      <HoodLandingPage
-        car={searchParams?.car}
-        brand={searchParams?.brand}
-        model={searchParams?.model}
-      />
-    );
-  }
 
   const product = await getProductWithLivePrice(base);
   const reviews = product.reviews?.length ? product.reviews : DEFAULT_REVIEWS;

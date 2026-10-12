@@ -1,25 +1,21 @@
 export const storeBrand = {
-  name: 'Confort DZ',
-  nameAr: 'كونفور ديزاد',
-  tagline: 'COMFORT STORE',
-  taglineAr: 'منتجات الراحة في الجزائر',
+  name: 'AYLA BAGS',
+  nameAr: 'آيلا باغز',
+  tagline: 'WOMENS BAGS',
+  taglineAr: 'حقائب نسائية في الجزائر',
   description:
-    'المتجر الجزائري لمنتجات الراحة اليومية — أجهزة تدليك، عناية، وأكسسوارات auto. الدفع عند الاستلام والتوصيل لـ 58 ولاية.',
-  email: 'contact@confortdz.shop',
+    'متجر AYLA BAGS — حقائب أنيقة مختارة بعناية. الدفع عند الاستلام، تشوفي الحقيبة قبل ما تدفعي، والتوصيل لـ 58 ولاية.',
+  email: 'contact@ayla.shop',
   accentClass: 'text-accent',
-};
-
-export const autoBrand = {
-  name: 'AUTO PLUS DZ',
-  nameAr: 'أوتو بلاس ديزاد',
-  taglineAr: 'أكسسوارات السيارات',
+  logoPrimary: 'AYLA',
+  logoSecondary: 'BAGS',
 };
 
 export function getSiteDisplayUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://confortdz.shop';
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://ayla.shop';
   try {
     return new URL(url).hostname;
   } catch {
-    return 'confortdz.shop';
+    return 'ayla.shop';
   }
 }

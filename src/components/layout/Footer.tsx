@@ -14,7 +14,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-2xl font-black mb-4">
-              كونفور <span className="text-secondary">ديزاد</span>
+              {storeBrand.logoPrimary}{' '}
+              <span className="text-secondary">{storeBrand.logoSecondary}</span>
             </h3>
             <p className="text-gray-400 leading-relaxed mb-4">{storeBrand.description}</p>
           </div>
@@ -23,9 +24,8 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2 inline-block">روابط سريعة</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/" className="hover:text-secondary transition-colors">الرئيسية</Link></li>
-              <li><Link href="/#products" className="hover:text-secondary transition-colors">المنتجات</Link></li>
-              <li><Link href="/product/hood-insulation-mat" className="hover:text-secondary transition-colors">موكات الكابو</Link></li>
-              <li><Link href="/#reviews" className="hover:text-secondary transition-colors">آراء الزبائن</Link></li>
+              <li><Link href="/#products" className="hover:text-secondary transition-colors">الحقائب</Link></li>
+              <li><Link href="/#reviews" className="hover:text-secondary transition-colors">آراء الزبونات</Link></li>
             </ul>
           </div>
 

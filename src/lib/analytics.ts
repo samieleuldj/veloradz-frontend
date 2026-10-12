@@ -1,4 +1,4 @@
-const SESSION_KEY = 'veloradz_sid';
+const SESSION_KEY = 'aylabags_sid';
 
 type EventType = 'page_view' | 'product_view' | 'checkout_start' | 'whatsapp_lead';
 
@@ -9,7 +9,7 @@ type TrackPayload = {
 };
 
 function getApiUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL || 'https://api.confortdz.shop';
+  return process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop';
 }
 
 export function getSessionId(): string {

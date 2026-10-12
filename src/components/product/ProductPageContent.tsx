@@ -9,8 +9,13 @@ import StickyOrderBar from '@/components/product/StickyOrderBar';
 import ProductSocialProof from '@/components/product/ProductSocialProof';
 import SupportedBrandsBar from '@/components/product/SupportedBrandsBar';
 import VehiclePresetBanner from '@/components/product/VehiclePresetBanner';
+import BagSpecs from '@/components/product/BagSpecs';
 import type { Product, ProductReview } from '@/data/products';
-import { HEALTH_TRUST_POINTS, VEHICLE_TRUST_POINTS } from '@/lib/product-trust-points';
+import {
+  BAG_TRUST_POINTS,
+  HEALTH_TRUST_POINTS,
+  VEHICLE_TRUST_POINTS,
+} from '@/lib/product-trust-points';
 import { storeBrand } from '@/lib/store-brand';
 import type { VehiclePreset } from '@/lib/vehicle-presets';
 
@@ -33,9 +38,14 @@ export default function ProductPageContent({
   hideBreadcrumb = false,
   vehiclePreset = null,
 }: Props) {
+  const isBag = Boolean(product.category || product.material);
   const problemText = product.problemText || DEFAULT_PROBLEM_TEXT;
   const solutionText = product.solutionText || DEFAULT_SOLUTION_TEXT;
-  const trustPoints = product.requiresVehicleInfo ? VEHICLE_TRUST_POINTS : HEALTH_TRUST_POINTS;
+  const trustPoints = product.requiresVehicleInfo
+    ? VEHICLE_TRUST_POINTS
+    : isBag
+      ? BAG_TRUST_POINTS
+      : HEALTH_TRUST_POINTS;
   const showUrgencyBanner = product.id === 'knee-red-light-massager';
 
   return (
@@ -74,6 +84,7 @@ export default function ProductPageContent({
               )}
               <h1 className="text-2xl font-black text-text mb-3 leading-tight">{product.name}</h1>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">{product.description}</p>
+              {isBag && <BagSpecs product={product} />}
               <ProductSocialProof reviewCount={product.reviewCount} rating={product.rating} />
               <ProductPriceDisplay
                 productId={product.id}
@@ -98,6 +109,7 @@ export default function ProductPageContent({
                 )}
                 <h1 className="text-3xl font-black text-text mb-3 leading-tight">{product.name}</h1>
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{product.description}</p>
+                {isBag && <BagSpecs product={product} />}
                 <ProductSocialProof reviewCount={product.reviewCount} rating={product.rating} />
                 <ProductPriceDisplay
                   productId={product.id}
@@ -135,56 +147,74 @@ export default function ProductPageContent({
             {product.requiresVehicleInfo && <SupportedBrandsBar />}
 
             <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 mt-8">
-              <div className="mb-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-xl">⚠️</div>
-                  <h2 className="text-2xl font-black text-text">تعاني من هذه المشكلة يومياً؟</h2>
+              {isBag ? (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-black text-text mb-3">لماذا هاد الحقيبة؟</h2>
+                  <p className="text-gray-600 text-lg leading-relaxed">{product.description}</p>
+                  <div className="mt-6">
+                    <BagSpecs product={product} />
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                  <p className="text-gray-600 text-lg leading-relaxed border-r-4 border-red-200 pr-4">
-                    {problemText}
-                  </p>
-                  {product.beforeImage && (
-                    <div className="w-full rounded-xl overflow-hidden border border-red-100 shadow-sm bg-gray-50">
-                      <Image
-                        src={product.beforeImage}
-                        alt={`${product.name} — المشكلة`}
-                        width={800}
-                        height={1000}
-                        className="w-full h-auto"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+              ) : (
+                <>
+                  <div className="mb-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-xl">
+                        ⚠️
+                      </div>
+                      <h2 className="text-2xl font-black text-text">تعاني من هذه المشكلة يومياً؟</h2>
                     </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="mt-10 pt-10 border-t border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-xl">💡</div>
-                  <h2 className="text-2xl font-black text-text">الحل اللي يريحك:</h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-6">
-                  {product.afterImage && (
-                    <div className="w-full rounded-xl overflow-hidden border border-green-100 shadow-sm bg-gray-50 order-2 md:order-1">
-                      <Image
-                        src={product.afterImage}
-                        alt={`${product.name} — الحل`}
-                        width={800}
-                        height={1000}
-                        className="w-full h-auto"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                      <p className="text-gray-600 text-lg leading-relaxed border-r-4 border-red-200 pr-4">
+                        {problemText}
+                      </p>
+                      {product.beforeImage && (
+                        <div className="w-full rounded-xl overflow-hidden border border-red-100 shadow-sm bg-gray-50">
+                          <Image
+                            src={product.beforeImage}
+                            alt={`${product.name} — المشكلة`}
+                            width={800}
+                            height={1000}
+                            className="w-full h-auto"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
-                  <p className="text-gray-700 text-lg leading-relaxed font-medium order-1 md:order-2 border-r-4 border-green-200 pr-4">
-                    {solutionText}
-                  </p>
-                </div>
-              </div>
+                  </div>
 
-              <div className="bg-blue-50/50 p-6 rounded-xl border border-blue-100 mt-8">
-                <h3 className="text-lg font-bold text-primary mb-4">واش راح تستفاد؟</h3>
+                  <div className="mt-10 pt-10 border-t border-gray-100">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-xl">
+                        💡
+                      </div>
+                      <h2 className="text-2xl font-black text-text">الحل اللي يريحك:</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-6">
+                      {product.afterImage && (
+                        <div className="w-full rounded-xl overflow-hidden border border-green-100 shadow-sm bg-gray-50 order-2 md:order-1">
+                          <Image
+                            src={product.afterImage}
+                            alt={`${product.name} — الحل`}
+                            width={800}
+                            height={1000}
+                            className="w-full h-auto"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                        </div>
+                      )}
+                      <p className="text-gray-700 text-lg leading-relaxed font-medium order-1 md:order-2 border-r-4 border-green-200 pr-4">
+                        {solutionText}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <div className="bg-background p-6 rounded-xl border border-primary/10 mt-8">
+                <h3 className="text-lg font-bold text-primary mb-4">
+                  {isBag ? 'تفاصيل الحقيبة' : 'واش راح تستفاد؟'}
+                </h3>
                 <ul className="space-y-4">
                   {product.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">

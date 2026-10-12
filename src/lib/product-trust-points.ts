@@ -4,6 +4,29 @@ export type TrustPoint = {
   desc: string;
 };
 
+export const BAG_TRUST_POINTS: TrustPoint[] = [
+  {
+    icon: '👜',
+    title: 'حقائب مختارة بعناية',
+    desc: 'تفاصيل وخامات واضحة — كيما في الصور.',
+  },
+  {
+    icon: '🔄',
+    title: 'استبدال 7 أيام',
+    desc: 'مشكل في المقاس أو اللون؟ نبدلو معاك.',
+  },
+  {
+    icon: '📞',
+    title: 'تأكيد قبل الإرسال',
+    desc: 'نتصلو بيك على WhatsApp للتأكيد.',
+  },
+  {
+    icon: '🤝',
+    title: 'الدفع عند الاستلام',
+    desc: 'تشوفي الحقيبة قبل ما تدفعي.',
+  },
+];
+
 export const VEHICLE_TRUST_POINTS: TrustPoint[] = [
   {
     icon: '🥇',

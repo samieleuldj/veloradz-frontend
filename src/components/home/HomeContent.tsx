@@ -2,15 +2,27 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { products } from '@/data/products';
+import { useMemo, useState } from 'react';
+import { products, type ProductCategory } from '@/data/products';
 import CartDrawer from '@/components/cart/CartDrawer';
 
-const HOOD_ID = 'hood-insulation-mat';
+const CATEGORY_FILTERS: { id: 'all' | ProductCategory; label: string }[] = [
+  { id: 'all', label: 'الكل' },
+  { id: 'crossbody', label: 'كروس' },
+  { id: 'tote', label: 'توت' },
+  { id: 'evening', label: 'سهرة' },
+];
 
 export default function HomeContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<string>('');
+  const [category, setCategory] = useState<'all' | ProductCategory>('all');
+
+  const visibleProducts = useMemo(
+    () =>
+      category === 'all' ? products : products.filter((p) => p.category === category),
+    [category]
+  );
 
   const handleQuickAdd = (productId: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -20,24 +32,24 @@ export default function HomeContent() {
 
   return (
     <div className="flex flex-col">
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-20">
+      <section className="bg-gradient-to-b from-background to-white py-12 md:py-20">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-blue-100 mb-6 text-sm font-bold text-primary">
-            <span className="animate-pulse">🟢</span> المتجر رقم #1 لمنتجات الراحة في الجزائر
+          <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-secondary/20 mb-6 text-sm font-bold text-primary">
+            <span className="animate-pulse">🟢</span> حقائب مختارة — AYLA BAGS الجزائر
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-text mb-4 leading-tight">
-            تخلص من <span className="text-accent">آلام الظهر والرقبة</span>
+            حقائب <span className="text-accent">تليق بيك</span>
             <br className="hidden md:block" />
-            {' '}واسترجع راحتك اليومية
+            {' '}— تشوفي، تستلمي، تدفعي
           </h1>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            منتجات طبية ومريحة مجربة من طرف آلاف الجزائريين. الدفع عند الاستلام والتوصيل لـ 58 ولاية.
+          <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">
+            كروس، توت، وسهرة — جودة تبان في التفاصيل. الدفع عند الاستلام والتوصيل لـ 58 ولاية.
           </p>
           <a
             href="#products"
-            className="inline-block bg-accent hover:bg-accent/90 text-white text-xl font-black py-4 px-12 rounded-xl shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] transition-transform active:scale-95"
+            className="inline-block bg-accent hover:bg-accent/90 text-white text-xl font-black py-4 px-12 rounded-xl shadow-[0_8px_20px_-6px_rgba(196,92,62,0.45)] transition-transform active:scale-95"
           >
-            تصفح المنتجات الآن
+            اكتشفي الحقائب
           </a>
         </div>
       </section>
@@ -62,13 +74,30 @@ export default function HomeContent() {
 
       <section id="products" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-text mb-2">منتجاتنا الأكثر مبيعاً</h2>
-            <p className="text-gray-500">اختر المنتج الذي يناسب احتياجك</p>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-black text-text mb-2">مجموعتنا</h2>
+            <p className="text-muted">اختاري الحقيبة اللي تمشي مع أسلوبك</p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {CATEGORY_FILTERS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setCategory(item.id)}
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
+                  category === item.id
+                    ? 'bg-primary text-white shadow-md'
+                    : 'bg-white text-muted border border-primary/10 hover:border-accent'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {products.map((product) => (
+            {visibleProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col group"
@@ -100,6 +129,9 @@ export default function HomeContent() {
                       {product.name}
                     </h3>
                   </Link>
+                  {product.material && (
+                    <p className="text-xs text-muted mb-2 line-clamp-1">{product.material}</p>
+                  )}
 
                   <div className="flex items-center gap-1 mb-3">
                     <div className="flex text-yellow-400 text-xs">⭐⭐⭐⭐⭐</div>
@@ -115,22 +147,13 @@ export default function HomeContent() {
                     )}
                   </div>
 
-                  {product.id === HOOD_ID ? (
-                    <Link
-                      href={`/product/${product.id}#order-form`}
-                      className="block w-full text-center bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-colors active:scale-95"
-                    >
-                      اختار سيارتك واطلب
-                    </Link>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={(e) => handleQuickAdd(product.id, e)}
-                      className="block w-full text-center bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-colors active:scale-95"
-                    >
-                      أطلب الآن
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={(e) => handleQuickAdd(product.id, e)}
+                    className="block w-full text-center bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-colors active:scale-95"
+                  >
+                    أطلبي الآن
+                  </button>
                 </div>
               </div>
             ))}
@@ -140,21 +163,21 @@ export default function HomeContent() {
 
       <section id="reviews" className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-black text-text mb-8">آلاف الجزائريين يثقون في كونفور ديزاد</h2>
+          <h2 className="text-2xl font-black text-text mb-8">آراء زبونات AYLA</h2>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 max-w-xs text-right">
+            <div className="bg-background p-4 rounded-xl border border-primary/10 max-w-xs text-right">
               <div className="flex text-yellow-400 text-sm mb-2">⭐⭐⭐⭐⭐</div>
-              <p className="text-gray-600 text-sm italic">
-                &quot;خدمة ما شاء الله، التوصيل كان سريع والمنتج كيما في التصويرة.&quot;
+              <p className="text-muted text-sm italic">
+                &quot;الحقيبة كيما في الصور، الخامة مليحة والتغليف محترم.&quot;
               </p>
-              <span className="block mt-2 font-bold text-sm text-gray-800">- كريم، قسنطينة</span>
+              <span className="block mt-2 font-bold text-sm text-text">- ياسمين، الجزائر</span>
             </div>
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 max-w-xs text-right">
+            <div className="bg-background p-4 rounded-xl border border-primary/10 max-w-xs text-right">
               <div className="flex text-yellow-400 text-sm mb-2">⭐⭐⭐⭐⭐</div>
-              <p className="text-gray-600 text-sm italic">
-                &quot;حزام الظهر ريحني بزاف في الخدمة، ننصح بيه أي واحد يطول في القعاد.&quot;
+              <p className="text-muted text-sm italic">
+                &quot;COD يطمّن — شفت الحقيبة قبل ما ندفع. توصيل سريع.&quot;
               </p>
-              <span className="block mt-2 font-bold text-sm text-gray-800">- سمير، العاصمة</span>
+              <span className="block mt-2 font-bold text-sm text-text">- إيناس، وهران</span>
             </div>
           </div>
         </div>

@@ -329,7 +329,7 @@ export default function CheckoutForm({
       notes: discountNote,
     };
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.confortdz.shop';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop';
 
     const apiPayload = {
       order_id: orderData.order_id,
