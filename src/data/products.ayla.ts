@@ -206,4 +206,46 @@ export const products: Product[] = [
       },
     ],
   },
+  {
+    id: 'chanel-vanity-master-quality',
+    name: 'Chanel Vanity — Master Quality',
+    collection: 'chanel',
+    bestSeller: true,
+    description:
+      'Vanity case matelassé — double zip, logo CC doré, anse top-handle. Master Quality avec boîte, dust bag et miroir intérieur. Choisissez votre coloris dans le formulaire.',
+    price: 8500,
+    badge: 'Master Quality',
+    category: 'daily',
+    material: 'Cuir matelassé',
+    dimensions: 'Vanity case',
+    colors: ['Bourdeaux (غرونا)', 'Brun', 'Rose', 'Bleu marine'],
+    rating: 4.9,
+    reviewCount: 36,
+    images: [
+      '/products/chanel-vanity-master/1.jpg',
+      '/products/chanel-vanity-master/2.jpg',
+      '/products/chanel-vanity-master/3.jpg',
+      '/products/chanel-vanity-master/4.jpg',
+    ],
+    features: [
+      'Master Quality — vanity matelassée, finitions premium',
+      '4 coloris : Bourdeaux, Brun, Rose, Bleu marine',
+      'Double zip + CC doré · intérieur avec miroir',
+      'Livraison avec boîte Chanel, dust bag et emballage',
+    ],
+    reviews: [
+      {
+        name: 'Amel R.',
+        city: 'الجزائر',
+        initial: 'أ',
+        text: 'Vanity Master quality — Rose كيما في الصور. البوات و dust bag معاها.',
+      },
+      {
+        name: 'Khadija B.',
+        city: 'عنابة',
+        initial: 'خ',
+        text: 'Bleu marine جميل، المرايا والداخلية نظيفين. اللون من الفورم.',
+      },
+    ],
+  },
 ];
