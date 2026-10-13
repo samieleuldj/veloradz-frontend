@@ -44,6 +44,14 @@ export type Product = {
 
 export { products } from './products.ayla';
 
+/** Color choices for checkout — every AYLA handbag must expose at least one color. */
+export function getProductColorOptions(product: Product): string[] {
+  if (product.collection) {
+    return product.colors?.length ? product.colors : ['Noir'];
+  }
+  return product.colors ?? [];
+}
+
 export const DEFAULT_REVIEWS: ProductReview[] = [
   {
     name: 'زبونة مؤكدة',

@@ -325,6 +325,9 @@ export default function CheckoutForm({
       .join(' | ');
 
     const orderId = `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
+    const orderProductName = selectedColor.trim()
+      ? `${productName} (${selectedColor.trim()})`
+      : productName;
     const orderData = {
       order_id: orderId,
       date: new Date().toLocaleString('ar-DZ', { timeZone: 'Africa/Algiers' }),
@@ -332,7 +335,7 @@ export default function CheckoutForm({
       phone: cleanPhone,
       wilaya: trimmedWilaya,
       commune: trimmedCommune,
-      product_name: productName,
+      product_name: orderProductName,
       quantity,
       unit_price: unitPrice,
       product_price: baseTotal,
@@ -428,7 +431,9 @@ export default function CheckoutForm({
         <p className={`text-sm ${isAutomotive ? 'text-zinc-400' : 'text-gray-500'}`}>
           {requiresVehicleInfo
             ? 'اختار سيارتك بالضبط — نتصلو بيك للتأكيد قبل الإرسال'
-            : 'يرجى إدخال معلوماتك وسنتصل بك للتأكيد'}
+            : mustPickColor
+              ? 'اختاري اللون ثم أكملي معلوماتك — نتصل بك للتأكيد قبل الإرسال'
+              : 'يرجى إدخال معلوماتك وسنتصل بك للتأكيد'}
         </p>
       </div>
 
