@@ -24,7 +24,7 @@ export const collections: Collection[] = [
     slug: 'chanel',
     name: 'Chanel',
     tagline: 'Le matelassé iconique',
-    cover: '/products/chanel-20cm/1.jpg',
+    cover: '/products/chanel-jumbo-25cm/1.jpg',
     gradient: 'from-[#1A1A1A] via-[#2A2A2A] to-[#0A0A0A]',
     wordmarkClass: 'font-sans font-bold tracking-[0.35em]',
   },
