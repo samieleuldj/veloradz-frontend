@@ -86,6 +86,48 @@ export const products: Product[] = [
     ],
   },
   {
+    id: 'louis-vuitton-monogram-5900',
+    name: 'Louis Vuitton — Good Quality',
+    collection: 'louis-vuitton',
+    bestSeller: true,
+    description:
+      'Sac bandoulière monogram / empreinte — bandoulière LV, zip doré, anse cuir. Good Quality avec boîte orange. Choisissez parmi 3 coloris dans le formulaire.',
+    price: 5900,
+    badge: 'Good Quality',
+    category: 'crossbody',
+    material: 'Cuir monogram empreinte + toile',
+    dimensions: 'Bandoulière',
+    colors: ['Khaki (كاكي)', 'Rose (وردي)', 'Monogram brun'],
+    rating: 4.86,
+    reviewCount: 39,
+    images: [
+      '/products/louis-vuitton-monogram-5900/1.jpg',
+      '/products/louis-vuitton-monogram-5900/2.jpg',
+      '/products/louis-vuitton-monogram-5900/3.jpg',
+      '/products/louis-vuitton-monogram-5900/4.jpg',
+    ],
+    features: [
+      'Good Quality — 3 coloris : Khaki, Rose, Monogram brun',
+      'Monogram empreinte ou toile classique + hardware doré',
+      'Bandoulière LV réglable + anse main',
+      'Livraison avec boîte Louis Vuitton et emballage',
+    ],
+    reviews: [
+      {
+        name: 'Amira Z.',
+        city: 'الجزائر',
+        initial: 'أ',
+        text: 'Khaki كيما في الصورة، bandoulière و zip يبانو quality. وصلت مع البوات.',
+      },
+      {
+        name: 'Salma B.',
+        city: 'قسنطينة',
+        initial: 'س',
+        text: 'Rose جميلة بزاف. اللون تختارو من الفورم قبل التأكيد.',
+      },
+    ],
+  },
+  {
     id: 'louis-vuitton-speedy',
     name: 'Louis Vuitton Speedy (Spidi)',
     collection: 'louis-vuitton',
