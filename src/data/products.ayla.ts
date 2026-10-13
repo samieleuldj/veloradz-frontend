@@ -86,6 +86,48 @@ export const products: Product[] = [
     ],
   },
   {
+    id: 'louis-vuitton-speedy',
+    name: 'Louis Vuitton Speedy',
+    collection: 'louis-vuitton',
+    bestSeller: true,
+    description:
+      'Speedy iconique en toile monogramme — bandoulières, cadenas LV doré, finitions cuir. Livraison avec boîte, dust bag et papiers. Choisissez le coloris cuir dans le formulaire.',
+    price: 6500,
+    badge: 'Best-seller',
+    category: 'daily',
+    material: 'Toile monogramme + cuir',
+    dimensions: 'Speedy',
+    colors: ['Monogram — cuir beige', 'Monogram — cuir bleu marine', 'Monogram — Litchi brown'],
+    rating: 4.88,
+    reviewCount: 48,
+    images: [
+      '/products/louis-vuitton-speedy/1.jpg',
+      '/products/louis-vuitton-speedy/2.jpg',
+      '/products/louis-vuitton-speedy/3.jpg',
+      '/products/louis-vuitton-speedy/4.jpg',
+    ],
+    features: [
+      'Toile monogramme LV + hardware doré',
+      '3 finitions cuir : beige, bleu marine, Litchi brown',
+      'Bandoulières · cadenas et clochette',
+      'Intérieur doublé signature — boîte LV + dust bag',
+    ],
+    reviews: [
+      {
+        name: 'Nadia K.',
+        city: 'الجزائر',
+        initial: 'ن',
+        text: 'Speedy كيما في الصور، monogram و cadenas يبانو quality. وصلت مع البوات.',
+      },
+      {
+        name: 'Leila O.',
+        city: 'وهران',
+        initial: 'ل',
+        text: 'خذيت bleu marine — الداخلية نظيفة. اللون من الفورم.',
+      },
+    ],
+  },
+  {
     id: 'chanel-20cm',
     name: 'Chanel 20 cm',
     collection: 'chanel',
