@@ -1,4 +1,9 @@
-export type CollectionSlug = 'louis-vuitton' | 'chanel' | 'gucci' | 'prada';
+export type CollectionSlug =
+  | 'louis-vuitton'
+  | 'chanel'
+  | 'gucci'
+  | 'prada'
+  | 'christian-louboutin';
 
 export type Collection = {
   slug: CollectionSlug;
@@ -41,6 +46,14 @@ export const collections: Collection[] = [
     tagline: 'Minimalisme raffiné',
     gradient: 'from-[#2B2B2B] via-[#4A4440] to-[#151515]',
     wordmarkClass: 'font-sans font-semibold tracking-[0.3em]',
+  },
+  {
+    slug: 'christian-louboutin',
+    name: 'Christian Louboutin',
+    tagline: 'Le rouge signature',
+    cover: '/products/christian-louboutin-good-quality/1.jpg',
+    gradient: 'from-[#1A1A1A] via-[#3D0A0A] to-[#0A0A0A]',
+    wordmarkClass: 'font-serif italic tracking-[0.15em]',
   },
 ];
 

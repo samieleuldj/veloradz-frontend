@@ -2,6 +2,48 @@ import type { Product } from './products';
 
 export const products: Product[] = [
   {
+    id: 'christian-louboutin-good-quality',
+    name: 'Christian Louboutin — Good Quality',
+    collection: 'christian-louboutin',
+    bestSeller: true,
+    description:
+      'Vanity case cuir grainé noir — studs, logo CL, double zip avec charms talon rouge signature. Intérieur rouge Louboutin. Good Quality — confirmez le coloris dans le formulaire.',
+    price: 5200,
+    badge: 'Good Quality',
+    category: 'daily',
+    material: 'Cuir grainé + hardware noir',
+    dimensions: 'Vanity case',
+    colors: ['Noir (أسود)'],
+    rating: 4.85,
+    reviewCount: 28,
+    images: [
+      '/products/christian-louboutin-good-quality/1.jpg',
+      '/products/christian-louboutin-good-quality/2.jpg',
+      '/products/christian-louboutin-good-quality/3.jpg',
+      '/products/christian-louboutin-good-quality/4.jpg',
+    ],
+    features: [
+      'Good Quality — finitions soignées, détails signature',
+      'Noir avec studs, logo CL et zip talons rouges',
+      'Intérieur doublé rouge · anse top-handle',
+      'Livraison avec emballage protecteur',
+    ],
+    reviews: [
+      {
+        name: 'Hana L.',
+        city: 'الجزائر',
+        initial: 'ه',
+        text: 'الvanity كيما في الصور، الzip تاع الصباط الحمراء يبان quality. الداخلية حمراء.',
+      },
+      {
+        name: 'Sara M.',
+        city: 'وهران',
+        initial: 'س',
+        text: 'Good quality مليحة، studs و CL واضحين. وصلت سالمة.',
+      },
+    ],
+  },
+  {
     id: 'louis-vuitton-25cm-good-quality',
     name: 'Louis Vuitton 25 cm — Good Quality',
     collection: 'louis-vuitton',

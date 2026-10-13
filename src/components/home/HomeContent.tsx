@@ -67,7 +67,7 @@ export default function HomeContent() {
             <h2 className="font-serif text-3xl md:text-5xl text-primary mt-2">Choisissez votre collection</h2>
             <div className="mx-auto mt-4 h-px w-24 bg-gold" />
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-6">
             {collections.map((c) => (
               <CollectionCard
                 key={c.slug}
