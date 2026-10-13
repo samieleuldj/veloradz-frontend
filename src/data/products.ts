@@ -1,4 +1,5 @@
 import type { CollectionSlug } from './collections';
+import type { ProductColorChoice } from './product-color-choices';
 
 export type ProductCategory = 'daily' | 'crossbody' | 'tote' | 'evening';
 
@@ -27,6 +28,8 @@ export type Product = {
   material?: string;
   dimensions?: string;
   colors?: string[];
+  /** Optional explicit swatches; otherwise derived from `colors` */
+  colorChoices?: ProductColorChoice[];
   /** Legacy landing fields (optional) */
   beforeImage?: string;
   afterImage?: string;
@@ -44,13 +47,8 @@ export type Product = {
 
 export { products } from './products.ayla';
 
-/** Color choices for checkout — every AYLA handbag must expose at least one color. */
-export function getProductColorOptions(product: Product): string[] {
-  if (product.collection) {
-    return product.colors?.length ? product.colors : ['Noir'];
-  }
-  return product.colors ?? [];
-}
+export { getProductColorChoices, formatColorsForSpecs } from './product-color-choices';
+export type { ProductColorChoice } from './product-color-choices';
 
 export const DEFAULT_REVIEWS: ProductReview[] = [
   {

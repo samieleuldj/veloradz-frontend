@@ -11,7 +11,7 @@ import SupportedBrandsBar from '@/components/product/SupportedBrandsBar';
 import VehiclePresetBanner from '@/components/product/VehiclePresetBanner';
 import BagSpecs from '@/components/product/BagSpecs';
 import { getCollection } from '@/data/collections';
-import { getProductColorOptions, type Product, type ProductReview } from '@/data/products';
+import { getProductColorChoices, type Product, type ProductReview } from '@/data/products';
 import {
   BAG_TRUST_POINTS,
   HEALTH_TRUST_POINTS,
@@ -144,7 +144,7 @@ export default function ProductPageContent({
                 productId={product.id}
                 productName={product.name}
                 price={product.price}
-                colorOptions={getProductColorOptions(product)}
+                colorOptions={getProductColorChoices(product)}
                 requiresVehicleInfo={product.requiresVehicleInfo}
                 showUrgencyBanner={showUrgencyBanner}
                 initialBrandId={vehiclePreset?.brandId}

@@ -55,7 +55,7 @@ export const products: Product[] = [
     category: 'daily',
     material: 'Cuir grainé + perles monogramme',
     dimensions: '25 cm',
-    colors: ['Noir', 'Brun', 'Khaki', 'Blanc / Crème'],
+    colors: ['Noir (أسود)', 'Brun (بني)', 'Khaki (كاكي)', 'Blanc / Crème (كريمي)'],
     rating: 4.8,
     reviewCount: 41,
     images: [
@@ -97,7 +97,11 @@ export const products: Product[] = [
     category: 'daily',
     material: 'Toile monogramme + cuir',
     dimensions: 'Speedy',
-    colors: ['Monogram — cuir beige', 'Monogram — cuir bleu marine', 'Monogram — Litchi brown'],
+    colors: [
+      'Monogram — cuir beige (بيج)',
+      'Monogram — cuir bleu marine (أزرق داكن)',
+      'Monogram — Litchi brown (بني ليتشي)',
+    ],
     rating: 4.88,
     reviewCount: 48,
     images: [
@@ -139,16 +143,17 @@ export const products: Product[] = [
     category: 'crossbody',
     material: 'Cuir matelassé',
     dimensions: '20 cm',
-    colors: ['Noir'],
+    colors: ['Noir (أسود)', 'Rose (وردي)'],
     rating: 4.9,
     reviewCount: 37,
     images: [
       '/products/chanel-20cm/1.jpg',
       '/products/chanel-20cm/2.jpg',
       '/products/chanel-20cm/3.jpg',
+      '/products/chanel-20cm/4.jpg',
     ],
     features: [
-      'Matelassé losange classique',
+      'Matelassé losange classique — Noir ou Rose',
       'Chaîne dorée entrelacée de cuir — portée épaule ou bandoulière',
       'Fermoir doré + fermeture aimantée intérieure',
       'Livré avec boîte et emballage protecteur',
@@ -266,7 +271,7 @@ export const products: Product[] = [
     category: 'daily',
     material: 'Cuir matelassé',
     dimensions: 'Vanity case',
-    colors: ['Bourdeaux (غرونا)', 'Brun', 'Rose', 'Bleu marine'],
+    colors: ['Bourdeaux (غرونا)', 'Brun (بني)', 'Rose (وردي)', 'Bleu marine (أزرق داكن)'],
     rating: 4.9,
     reviewCount: 36,
     images: [
