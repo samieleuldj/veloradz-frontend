@@ -87,7 +87,7 @@ export const products: Product[] = [
   },
   {
     id: 'louis-vuitton-speedy',
-    name: 'Louis Vuitton Speedy',
+    name: 'Louis Vuitton Speedy (Spidi)',
     collection: 'louis-vuitton',
     bestSeller: true,
     description:

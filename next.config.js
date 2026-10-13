@@ -13,6 +13,11 @@ const nextConfig = {
         destination: 'https://api.veloradz.shop/admin/:path*',
         permanent: false,
       },
+      {
+        source: '/product/louis-vuitton-spidi',
+        destination: '/product/louis-vuitton-speedy',
+        permanent: true,
+      },
     ];
   },
   async headers() {
