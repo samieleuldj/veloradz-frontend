@@ -144,6 +144,7 @@ export default function ProductPageContent({
                 productId={product.id}
                 productName={product.name}
                 price={product.price}
+                colorOptions={product.colors}
                 requiresVehicleInfo={product.requiresVehicleInfo}
                 showUrgencyBanner={showUrgencyBanner}
                 initialBrandId={vehiclePreset?.brandId}

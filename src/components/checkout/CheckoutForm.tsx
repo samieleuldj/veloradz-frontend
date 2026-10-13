@@ -60,6 +60,8 @@ interface CheckoutFormProps {
   productId: string;
   productName: string;
   price: number;
+  /** When set, customer must pick a color before submitting */
+  colorOptions?: string[];
   requiresVehicleInfo?: boolean;
   showUrgencyBanner?: boolean;
   variant?: 'default' | 'automotive';
@@ -71,6 +73,7 @@ export default function CheckoutForm({
   productId,
   productName,
   price,
+  colorOptions,
   requiresVehicleInfo = false,
   showUrgencyBanner = false,
   variant = 'default',
@@ -102,7 +105,10 @@ export default function CheckoutForm({
   const [vehicleManual, setVehicleManual] = useState('');
   const [vehicleError, setVehicleError] = useState('');
   const [communeManual, setCommuneManual] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [colorError, setColorError] = useState('');
   const carModels = getModelsForBrand(carBrandId);
+  const mustPickColor = Boolean(colorOptions && colorOptions.length > 0);
   const checkoutTracked = useRef(false);
 
   const isNameValid = customerName.trim().length >= 3;
@@ -147,6 +153,7 @@ export default function CheckoutForm({
     const vehicle = vehicleLabel;
     const lines = [
       `سلام، بغيت نطلب ${productName} (${price} دج — الدفع عند الاستلام).`,
+      selectedColor ? `اللون: ${selectedColor}` : '',
       vehicle ? `سيارتي: ${vehicle}` : '',
       wilaya ? `الولاية: ${wilaya}` : '',
       customerName.trim() ? `الاسم: ${customerName.trim()}` : '',
@@ -154,7 +161,7 @@ export default function CheckoutForm({
     ].filter(Boolean);
     const text = encodeURIComponent(lines.join('\n'));
     return `${STORE_WHATSAPP_URL}?text=${text}`;
-  }, [vehicleLabel, wilaya, customerName, phone, productName, price]);
+  }, [vehicleLabel, wilaya, customerName, phone, productName, price, selectedColor]);
 
   const openWhatsAppOrder = () => {
     trackLead({ productId, productName, price: unitPrice, quantity });
@@ -274,6 +281,13 @@ export default function CheckoutForm({
       hasError = true;
     }
 
+    if (mustPickColor && !selectedColor.trim()) {
+      setColorError('يرجى اختيار اللون');
+      hasError = true;
+    } else {
+      setColorError('');
+    }
+
     if (requiresVehicleInfo) {
       if (useManualVehicle) {
         if (vehicleManual.trim().length < 3) {
@@ -305,7 +319,8 @@ export default function CheckoutForm({
     setIsSubmitting(true);
 
     const vehicleNote = requiresVehicleInfo ? `السيارة: ${vehicleLabel}` : '';
-    const discountNote = [vehicleNote, exitDiscount > 0 ? `خصم ${exitDiscount} دج (عرض خروج)` : '']
+    const colorNote = selectedColor.trim() ? `اللون: ${selectedColor.trim()}` : '';
+    const discountNote = [colorNote, vehicleNote, exitDiscount > 0 ? `خصم ${exitDiscount} دج (عرض خروج)` : '']
       .filter(Boolean)
       .join(' | ');
 
@@ -438,6 +453,35 @@ export default function CheckoutForm({
           </div>
           {nameError && <p className="text-red-500 text-xs mt-1 font-bold">{nameError}</p>}
         </div>
+
+        {mustPickColor && colorOptions && (
+          <div>
+            <label htmlFor="product_color" className="block text-sm font-bold text-gray-700 mb-1">
+              اللون *
+            </label>
+            <select
+              id="product_color"
+              name="product_color"
+              required
+              value={selectedColor}
+              onChange={(e) => {
+                setSelectedColor(e.target.value);
+                setColorError('');
+              }}
+              className={`w-full px-4 py-3 rounded-xl border text-gray-900 ${
+                colorError ? 'border-red-500 focus:ring-red-500' : selectedColor ? 'border-green-400 focus:ring-green-500' : 'border-gray-300 focus:ring-primary'
+              } focus:ring-2 focus:border-transparent outline-none transition-all bg-white appearance-auto`}
+            >
+              <option value="">— اختر اللون —</option>
+              {colorOptions.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            {colorError && <p className="text-red-500 text-xs mt-1 font-bold">{colorError}</p>}
+          </div>
+        )}
 
         {requiresVehicleInfo && (
           <div className="rounded-xl border-2 border-primary/30 bg-gradient-to-b from-blue-50 to-white p-4 space-y-4 relative z-10">

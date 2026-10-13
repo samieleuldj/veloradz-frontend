@@ -2,6 +2,48 @@ import type { Product } from './products';
 
 export const products: Product[] = [
   {
+    id: 'louis-vuitton-25cm-good-quality',
+    name: 'Louis Vuitton 25 cm — Good Quality',
+    collection: 'louis-vuitton',
+    bestSeller: true,
+    description:
+      'Sac top-handle 25 cm — cuir grainé, monogramme perlé, fermoir LV doré. Good Quality avec boîte et dust bag. Choisissez votre coloris dans le formulaire.',
+    price: 5900,
+    badge: 'Good Quality',
+    category: 'daily',
+    material: 'Cuir grainé + perles monogramme',
+    dimensions: '25 cm',
+    colors: ['Noir', 'Brun', 'Khaki', 'Blanc / Crème'],
+    rating: 4.8,
+    reviewCount: 41,
+    images: [
+      '/products/louis-vuitton-25cm/1.jpg',
+      '/products/louis-vuitton-25cm/2.jpg',
+      '/products/louis-vuitton-25cm/3.jpg',
+      '/products/louis-vuitton-25cm/4.jpg',
+    ],
+    features: [
+      'Monogramme LV en perles blanches sur cuir grainé',
+      '4 coloris : Noir, Brun, Khaki, Blanc / Crème',
+      'Fermoir LV métal doré + anse top-handle',
+      'Intérieur doublé signature — livraison avec boîte LV',
+    ],
+    reviews: [
+      {
+        name: 'Sarah A.',
+        city: 'الجزائر',
+        initial: 'س',
+        text: 'Khaki كيما في الصورة، البيرلات والLV يبانو quality. وصلت مع البوات.',
+      },
+      {
+        name: 'Maya T.',
+        city: 'وهران',
+        initial: 'م',
+        text: 'خذيت Noir، الداخلية حمراء كيما الأصل. راضية بزاف.',
+      },
+    ],
+  },
+  {
     id: 'chanel-20cm',
     name: 'Chanel 20 cm',
     collection: 'chanel',

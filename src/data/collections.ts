@@ -16,6 +16,7 @@ export const collections: Collection[] = [
     slug: 'louis-vuitton',
     name: 'Louis Vuitton',
     tagline: 'Monogramme intemporel',
+    cover: '/products/louis-vuitton-25cm/1.jpg',
     gradient: 'from-[#5C3A21] via-[#7A5230] to-[#2B1A0E]',
     wordmarkClass: 'font-serif tracking-[0.25em]',
   },
