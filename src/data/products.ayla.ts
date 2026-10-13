@@ -42,4 +42,47 @@ export const products: Product[] = [
       },
     ],
   },
+  {
+    id: 'chanel-jumbo-20cm-master',
+    name: 'Chanel Jumbo 20 cm — Master Quality',
+    collection: 'chanel',
+    bestSeller: true,
+    description:
+      'Flap matelassé caviar 20 cm — finition Master Quality. Chaîne entrelacée de cuir, fermoir CC, boîte + dust bag + carte d’authenticité. Choisissez votre coloris ci-dessous.',
+    price: 7900,
+    badge: 'Master Quality',
+    category: 'crossbody',
+    material: 'Cuir caviar matelassé',
+    dimensions: '20 cm',
+    colors: ['Noir — hardware doré', 'Noir So Black', 'Bourdeaux — hardware doré'],
+    rating: 4.9,
+    reviewCount: 52,
+    images: [
+      '/products/chanel-jumbo-20cm/1.jpg',
+      '/products/chanel-jumbo-20cm/2.jpg',
+      '/products/chanel-jumbo-20cm/3.jpg',
+      '/products/chanel-jumbo-20cm/4.jpg',
+      '/products/chanel-jumbo-20cm/5.jpg',
+    ],
+    features: [
+      'Master Quality — finitions premium, détails soignés',
+      '3 coloris : Noir / Or, So Black (hardware noir), Bourdeaux / Or',
+      'Matelassé losange + chaîne entrelacée de cuir',
+      'Livraison avec boîte Chanel, dust bag et carte',
+    ],
+    reviews: [
+      {
+        name: 'Lina K.',
+        city: 'الجزائر',
+        initial: 'ل',
+        text: 'Master quality فعلاً — الكuir والسلسلة يبانو فاخرين. Bourdeaux كيما في الصورة.',
+      },
+      {
+        name: 'Nour H.',
+        city: 'بجاية',
+        initial: 'ن',
+        text: 'So Black جميلة بزاف. وصلت كاملة مع البوات والكارت.',
+      },
+    ],
+  },
 ];
