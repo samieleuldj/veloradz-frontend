@@ -23,6 +23,18 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/products/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/brand/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
         source: '/:path*',
         headers: [
           // Tell browsers not to upgrade to HTTP/3 (QUIC) when Cloudflare passes this through.
@@ -30,6 +42,11 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 828, 1080, 1200],
+    imageSizes: [64, 96, 128, 256],
   },
 };
 

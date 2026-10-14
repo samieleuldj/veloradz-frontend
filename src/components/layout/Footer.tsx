@@ -6,6 +6,7 @@ import {
   STORE_WHATSAPP_URL,
 } from '@/lib/store';
 import { storeBrand } from '@/lib/store-brand';
+import { products } from '@/data/products';
 
 export default function Footer() {
   return (
@@ -19,6 +20,9 @@ export default function Footer() {
             </h3>
             <p className="font-serif italic text-gold-light mb-4" dir="ltr">L&apos;élégance à portée de main</p>
             <p className="text-gray-400 leading-relaxed mb-4">{storeBrand.description}</p>
+            <p className="text-[10px] text-gray-500 tracking-wide" dir="ltr">
+              Catalogue: {products.length} modèles
+            </p>
           </div>
 
           <div>

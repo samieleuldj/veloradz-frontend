@@ -24,8 +24,6 @@ import {
   getModelsForBrand,
 } from '@/data/car-brands';
 import { getSiteDisplayUrl } from '@/lib/store-brand';
-import type { ProductColorChoice } from '@/data/product-color-choices';
-import CheckoutColorPicker from '@/components/checkout/CheckoutColorPicker';
 
 function formatAlgerianPhoneInput(value: string): string {
   const digits = value.replace(/\D/g, '').slice(0, 10);
@@ -63,7 +61,7 @@ interface CheckoutFormProps {
   productName: string;
   price: number;
   /** When set, customer must pick a color before submitting */
-  colorOptions?: ProductColorChoice[];
+  colorOptions?: string[];
   requiresVehicleInfo?: boolean;
   showUrgencyBanner?: boolean;
   variant?: 'default' | 'automotive';
@@ -462,15 +460,32 @@ export default function CheckoutForm({
         </div>
 
         {mustPickColor && colorOptions && (
-          <CheckoutColorPicker
-            choices={colorOptions}
-            value={selectedColor}
-            onChange={(v) => {
-              setSelectedColor(v);
-              setColorError('');
-            }}
-            error={colorError}
-          />
+          <div>
+            <label htmlFor="product_color" className="block text-sm font-bold text-gray-700 mb-1">
+              اللون *
+            </label>
+            <select
+              id="product_color"
+              name="product_color"
+              required
+              value={selectedColor}
+              onChange={(e) => {
+                setSelectedColor(e.target.value);
+                setColorError('');
+              }}
+              className={`w-full px-4 py-3 rounded-xl border text-gray-900 ${
+                colorError ? 'border-red-500 focus:ring-red-500' : selectedColor ? 'border-green-400 focus:ring-green-500' : 'border-gray-300 focus:ring-primary'
+              } focus:ring-2 focus:border-transparent outline-none transition-all bg-white appearance-auto`}
+            >
+              <option value="">— اختر اللون —</option>
+              {colorOptions.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            {colorError && <p className="text-red-500 text-xs mt-1 font-bold">{colorError}</p>}
+          </div>
         )}
 
         {requiresVehicleInfo && (

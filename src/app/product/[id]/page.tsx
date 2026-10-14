@@ -8,7 +8,11 @@ import JsonLd from '@/components/seo/JsonLd';
 import { buildPageMetadata, productJsonLd, siteConfig } from '@/lib/seo';
 import { getProductWithLivePrice } from '@/lib/product-prices';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return products.map((p) => ({ id: p.id }));
+}
 
 export async function generateMetadata({
   params,

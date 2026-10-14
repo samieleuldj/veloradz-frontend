@@ -15,7 +15,7 @@ const TRUST_ITEMS = [
 
 export default function HomeContent() {
   const bestSellers = products.filter((p) => p.bestSeller);
-  const featured = bestSellers.length > 0 ? bestSellers : products;
+  const featured = (bestSellers.length > 0 ? bestSellers : products).slice(0, 6);
 
   return (
     <div className="flex flex-col bg-background">
