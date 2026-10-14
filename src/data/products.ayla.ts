@@ -211,6 +211,47 @@ export const products: Product[] = [
     ],
   },
   {
+    id: 'chanel-kelly-6200',
+    name: 'Chanel Kelly',
+    collection: 'chanel',
+    bestSeller: true,
+    description:
+      'Kelly top-handle matelassé — fermoir CC doré, anse rigide, finitions soignées. Livraison avec boîte Chanel. Choisissez parmi 4 coloris dans le formulaire.',
+    price: 6200,
+    category: 'daily',
+    material: 'Cuir matelassé',
+    dimensions: 'Kelly',
+    colors: ['Rose (وردي)', 'Beige (باج)', 'Noir (أسود)', 'Gronat (غرونا)'],
+    rating: 4.87,
+    reviewCount: 33,
+    images: [
+      '/products/chanel-kelly/1.jpg',
+      '/products/chanel-kelly/2.jpg',
+      '/products/chanel-kelly/3.jpg',
+      '/products/chanel-kelly/4.jpg',
+    ],
+    features: [
+      'Style Kelly — matelassé + anse top-handle',
+      '4 coloris : Rose · Beige · Noir · Gronat',
+      'Fermoir CC doré · pieds métal',
+      'Livraison avec boîte et emballage protecteur',
+    ],
+    reviews: [
+      {
+        name: 'Meriem L.',
+        city: 'الجزائر',
+        initial: 'م',
+        text: 'Kelly Rose كيما في الصورة، CC و matelassé يبانو quality. وصلت مع البوات.',
+      },
+      {
+        name: 'Hiba R.',
+        city: 'بجاية',
+        initial: 'ه',
+        text: 'خذيت Noir — anse ثابتة و finitions نظيفة. اللون تختارو في الفورm.',
+      },
+    ],
+  },
+  {
     id: 'chanel-jumbo-25cm-6400',
     name: 'Chanel Jumbo 25 cm',
     collection: 'chanel',
