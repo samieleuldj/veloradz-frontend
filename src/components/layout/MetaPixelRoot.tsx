@@ -1,34 +1,9 @@
-'use client';
-
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
-import { getMetaPixelIdForPath, getMetaPixelIdForProduct } from '@/lib/meta-pixel';
-import { PURCHASE_STORAGE_KEY } from '@/lib/pixels';
+import { getDefaultMetaPixelId } from '@/lib/meta-pixel';
 
-export default function MetaPixel() {
-  const pathname = usePathname();
-  
-  // Try to get pixel ID from pending purchase first (for thank-you page)
-  let pixelId = '';
-  if (typeof window !== 'undefined') {
-    const pendingRaw = window.sessionStorage.getItem(PURCHASE_STORAGE_KEY);
-    if (pendingRaw) {
-      try {
-        const pending = JSON.parse(pendingRaw);
-        if (pending && pending.productId) {
-          pixelId = getMetaPixelIdForProduct(pending.productId);
-        }
-      } catch (e) {
-        // ignore
-      }
-    }
-  }
-
-  // Fallback to pathname if not on thank-you page or no pending purchase
-  if (!pixelId) {
-    pixelId = getMetaPixelIdForPath(pathname);
-  }
-
+/** Server component — reads META_PIXEL_ID at runtime (EasyPanel) + build-time NEXT_PUBLIC_*. */
+export default function MetaPixelRoot() {
+  const pixelId = getDefaultMetaPixelId();
   if (!pixelId) {
     return null;
   }
@@ -46,6 +21,7 @@ export default function MetaPixel() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '${pixelId}');
+          fbq('track', 'PageView');
         `}
       </Script>
       <noscript>

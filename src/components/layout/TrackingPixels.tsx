@@ -38,7 +38,7 @@ export default function TrackingPixels() {
         <PixelEvents />
       </Suspense>
 
-      {/* Meta Pixel loads from MetaPixel.tsx (server runtime env) */}
+      {/* Meta Pixel base script: MetaPixelRoot.tsx */}
 
       {/* TikTok Pixel Code */}
       {TIKTOK_ID && TIKTOK_ID !== 'your_tiktok_pixel_id' && (

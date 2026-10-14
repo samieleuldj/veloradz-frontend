@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { Cairo, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import SiteChrome from '@/components/layout/SiteChrome';
-import MetaPixel from '@/components/layout/MetaPixel';
+import MetaPixelRoot from '@/components/layout/MetaPixelRoot';
 import TrackingPixels from '@/components/layout/TrackingPixels';
 import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
 import JsonLd from '@/components/seo/JsonLd';
@@ -63,7 +63,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className="scroll-smooth">
       <body className={`${cairo.className} ${cormorant.variable} flex flex-col min-h-screen`}>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        <MetaPixel />
+        <MetaPixelRoot />
         <TrackingPixels />
         <Suspense fallback={null}>
           <AnalyticsTracker />
