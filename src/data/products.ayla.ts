@@ -128,6 +128,47 @@ export const products: Product[] = [
     ],
   },
   {
+    id: 'louis-vuitton-alma-6100',
+    name: 'Louis Vuitton Alma',
+    collection: 'louis-vuitton',
+    bestSeller: true,
+    description:
+      'Sac top-handle style Alma — cuir matelassé vertical, logo LV doré, mini pochette chaîne. Anse + bandoulière. Choisissez parmi 4 coloris dans le formulaire.',
+    price: 6100,
+    category: 'daily',
+    material: 'Cuir matelassé',
+    dimensions: 'Alma',
+    colors: ['Gronat (غرونا)', 'Beige (باج)', 'Brun', 'Noir (أسود)'],
+    rating: 4.87,
+    reviewCount: 35,
+    images: [
+      '/products/louis-vuitton-alma-6100/1.jpg',
+      '/products/louis-vuitton-alma-6100/2.jpg',
+      '/products/louis-vuitton-alma-6100/3.jpg',
+      '/products/louis-vuitton-alma-6100/4.jpg',
+    ],
+    features: [
+      'Style Alma — matelassé vertical + hardware doré',
+      '4 coloris : Gronat · Beige · Brun · Noir',
+      'Mini pochette sur chaîne · bandoulière amovible',
+      'Livraison avec emballage protecteur',
+    ],
+    reviews: [
+      {
+        name: 'Karima D.',
+        city: 'الجزائر',
+        initial: 'ك',
+        text: 'Gronat كيما في الصور، pochette و bandoulière معاها. quality مليحة.',
+      },
+      {
+        name: 'Nadia S.',
+        city: 'وهران',
+        initial: 'ن',
+        text: 'Beige جميلة، matelassé vertical يبان فاخر. اللون من الفورm.',
+      },
+    ],
+  },
+  {
     id: 'louis-vuitton-speedy',
     name: 'Louis Vuitton Speedy (Spidi)',
     collection: 'louis-vuitton',
