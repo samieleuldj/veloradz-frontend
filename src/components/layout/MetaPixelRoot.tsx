@@ -10,7 +10,7 @@ export default function MetaPixelRoot() {
 
   return (
     <>
-      <Script id={`meta-pixel-${pixelId}`} strategy="afterInteractive">
+      <Script id={`meta-pixel-${pixelId}`} strategy="lazyOnload">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

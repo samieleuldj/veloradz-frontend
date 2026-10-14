@@ -46,23 +46,39 @@ function getUtmParams() {
 export async function trackEvent(eventType: EventType, payload: TrackPayload = {}) {
   if (typeof window === 'undefined') return;
 
-  try {
-    void fetch(`${getApiUrl()}/api/analytics/event`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-      body: JSON.stringify({
-        event_type: eventType,
-        session_id: getSessionId(),
-        page_path: payload.page_path || window.location.pathname,
-        product_id: payload.product_id,
-        product_name: payload.product_name,
-        ...getUtmParams(),
-      }),
-    });
-  } catch {
-    // Analytics should never block the store UX.
-  }
+  const send = async () => {
+    try {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), 4000);
+      try {
+        await fetch(`${getApiUrl()}/api/analytics/event`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          keepalive: true,
+          signal: controller.signal,
+          body: JSON.stringify({
+            event_type: eventType,
+            session_id: getSessionId(),
+            page_path: payload.page_path || window.location.pathname,
+            product_id: payload.product_id,
+            product_name: payload.product_name,
+            ...getUtmParams(),
+          }),
+        });
+      } finally {
+        window.clearTimeout(timer);
+      }
+    } catch {
+      // Analytics should never block the store UX.
+    }
+  };
+
+  const schedule =
+    typeof window.requestIdleCallback === 'function'
+      ? (cb: () => void) => window.requestIdleCallback(cb, { timeout: 3000 })
+      : (cb: () => void) => window.setTimeout(cb, 1500);
+
+  schedule(() => void send());
 }
 
 export function getTrackingContext() {

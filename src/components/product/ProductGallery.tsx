@@ -65,14 +65,24 @@ export default function ProductGallery({ images, productName, productId }: Produ
         <div className="absolute inset-0">
           {images.map((src, index) => (
             <div key={src} data-slide={index} className={styles.slide}>
-              <img
-                src={src}
-                alt={`${productName} - صورة ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-contain p-2"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-                {...(index === 0 ? { fetchPriority: 'high' as const } : {})}
-              />
+              {index === 0 ? (
+                <img
+                  src={src}
+                  alt={`${productName} - صورة ${index + 1}`}
+                  className="absolute inset-0 w-full h-full object-contain p-2"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              ) : (
+                <img
+                  src={src}
+                  alt={`${productName} - صورة ${index + 1}`}
+                  className="absolute inset-0 w-full h-full object-contain p-2"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
             </div>
           ))}
         </div>

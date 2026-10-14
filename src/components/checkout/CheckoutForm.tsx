@@ -369,11 +369,15 @@ export default function CheckoutForm({
     };
 
     try {
+      const controller = new AbortController();
+      const orderTimer = window.setTimeout(() => controller.abort(), 15000);
       const apiResponse = await fetch(`${apiUrl}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify(apiPayload),
       });
+      window.clearTimeout(orderTimer);
 
       if (!apiResponse.ok) {
         const errorBody = await apiResponse.json().catch(() => null);
@@ -399,8 +403,13 @@ export default function CheckoutForm({
       });
 
       window.location.href = `/thank-you?total=${total}&orderId=${encodeURIComponent(orderId)}`;
-    } catch {
-      setSubmitError('خطأ في الاتصال. تحقق من الإنترنت وحاول مرة أخرى.');
+    } catch (err) {
+      const aborted = err instanceof DOMException && err.name === 'AbortError';
+      setSubmitError(
+        aborted
+          ? 'السيرفر ما ردّش بسرعة. تأكد أن backend (aylabackend) شغّال و Domain مفعّل في EasyPanel.'
+          : 'خطأ في الاتصال. تحقق من الإنترنت وحاول مرة أخرى.'
+      );
       setIsSubmitting(false);
     }
   };
