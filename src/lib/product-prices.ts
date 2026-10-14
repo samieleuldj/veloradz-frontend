@@ -1,7 +1,8 @@
 import type { Product } from '@/data/products';
 
 const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop'
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://veloradz-database-aylabackend.ikpdwj.easypanel.host'
 ).replace(/\/$/, '');
 
 export type LivePriceOverride = {

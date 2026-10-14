@@ -1,16 +1,21 @@
+const AYLA_API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://veloradz-database-aylabackend.ikpdwj.easypanel.host';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   async redirects() {
+    const adminBase = `${AYLA_API_URL.replace(/\/$/, '')}/admin`;
     return [
       {
         source: '/admin',
-        destination: 'https://api.veloradz.shop/admin',
+        destination: adminBase,
         permanent: false,
       },
       {
         source: '/admin/:path*',
-        destination: 'https://api.veloradz.shop/admin/:path*',
+        destination: `${adminBase}/:path*`,
         permanent: false,
       },
       {

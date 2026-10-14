@@ -9,7 +9,10 @@ type TrackPayload = {
 };
 
 function getApiUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop';
+  return (
+    process.env.NEXT_PUBLIC_API_URL ||
+    'https://veloradz-database-aylabackend.ikpdwj.easypanel.host'
+  );
 }
 
 export function getSessionId(): string {

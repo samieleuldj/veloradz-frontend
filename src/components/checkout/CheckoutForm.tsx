@@ -347,7 +347,9 @@ export default function CheckoutForm({
       notes: discountNote,
     };
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop';
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      'https://veloradz-database-aylabackend.ikpdwj.easypanel.host';
 
     const apiPayload = {
       order_id: orderData.order_id,

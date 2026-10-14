@@ -3,7 +3,8 @@
 import { useEffect } from 'react';
 
 const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL || 'https://api.aylabags.shop'
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://veloradz-database-aylabackend.ikpdwj.easypanel.host'
 ).replace(/\/$/, '');
 
 export const LIVE_PRICE_EVENT = 'autoplus-live-price';
