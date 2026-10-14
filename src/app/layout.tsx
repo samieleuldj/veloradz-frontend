@@ -6,7 +6,6 @@ import SiteChrome from '@/components/layout/SiteChrome';
 import MetaPixel from '@/components/layout/MetaPixel';
 import TrackingPixels from '@/components/layout/TrackingPixels';
 import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
-import LiveStorefrontPrices from '@/components/product/LiveStorefrontPrices';
 import JsonLd from '@/components/seo/JsonLd';
 import {
   buildPageMetadata,
@@ -16,11 +15,12 @@ import {
   websiteJsonLd,
 } from '@/lib/seo';
 
-const cairo = Cairo({ subsets: ['arabic', 'latin'] });
+const cairo = Cairo({ subsets: ['arabic', 'latin'], display: 'swap' });
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-serif',
+  display: 'swap',
 });
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -68,7 +68,6 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <AnalyticsTracker />
         </Suspense>
-        <LiveStorefrontPrices />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

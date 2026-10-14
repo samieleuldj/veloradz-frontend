@@ -44,9 +44,10 @@ export async function trackEvent(eventType: EventType, payload: TrackPayload = {
   if (typeof window === 'undefined') return;
 
   try {
-    await fetch(`${getApiUrl()}/api/analytics/event`, {
+    void fetch(`${getApiUrl()}/api/analytics/event`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
       body: JSON.stringify({
         event_type: eventType,
         session_id: getSessionId(),
@@ -55,7 +56,6 @@ export async function trackEvent(eventType: EventType, payload: TrackPayload = {
         product_name: payload.product_name,
         ...getUtmParams(),
       }),
-      keepalive: true,
     });
   } catch {
     // Analytics should never block the store UX.

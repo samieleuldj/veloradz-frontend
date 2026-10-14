@@ -14,9 +14,7 @@ export default function LiveStorefrontPrices() {
 
     async function syncPrices() {
       try {
-        const res = await fetch(`${API_URL}/api/storefront/prices`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(`${API_URL}/api/storefront/prices`);
         if (!res.ok || cancelled) return;
         const data = await res.json();
         window.dispatchEvent(
@@ -27,9 +25,12 @@ export default function LiveStorefrontPrices() {
       }
     }
 
-    syncPrices();
+    const timeoutId = window.setTimeout(() => {
+      void syncPrices();
+    }, 2000);
     return () => {
       cancelled = true;
+      window.clearTimeout(timeoutId);
     };
   }, []);
 

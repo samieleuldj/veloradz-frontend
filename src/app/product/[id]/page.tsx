@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { DEFAULT_REVIEWS, products } from '@/data/products';
 import { notFound } from 'next/navigation';
 import ProductPageContent from '@/components/product/ProductPageContent';
 import ProductViewPixel from '@/components/tracking/ProductViewPixel';
-import ExitIntentOffer from '@/components/product/ExitIntentOffer';
+import LiveStorefrontPrices from '@/components/product/LiveStorefrontPrices';
 import JsonLd from '@/components/seo/JsonLd';
+
+const ExitIntentOffer = dynamic(() => import('@/components/product/ExitIntentOffer'), {
+  ssr: false,
+});
 import { buildPageMetadata, productJsonLd, siteConfig } from '@/lib/seo';
 import { getProductWithLivePrice } from '@/lib/product-prices';
 
@@ -50,6 +55,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         price={product.price}
       />
       <JsonLd data={productJsonLd(product)} />
+      <LiveStorefrontPrices />
       <ProductPageContent product={product} reviews={reviews} />
       <ExitIntentOffer
         productId={product.id}

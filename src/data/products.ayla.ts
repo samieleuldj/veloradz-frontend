@@ -169,6 +169,47 @@ export const products: Product[] = [
     ],
   },
   {
+    id: 'louis-vuitton-3p-3900',
+    name: 'Louis Vuitton 3P (Félicie)',
+    collection: 'louis-vuitton',
+    bestSeller: true,
+    description:
+      'Set 3 pièces empreinte monogram — pochette enveloppe, mini zip et porte-cartes, chaîne dorée. Boîtes LV. Choisissez votre coloris dans le formulaire.',
+    price: 3900,
+    category: 'crossbody',
+    material: 'Cuir empreinte monogram',
+    dimensions: '3 pièces',
+    colors: ['Rouge (أحمر)', 'Noir (أسود)', 'Rose (وردي)'],
+    rating: 4.84,
+    reviewCount: 31,
+    images: [
+      '/products/louis-vuitton-3p/1.jpg',
+      '/products/louis-vuitton-3p/2.jpg',
+      '/products/louis-vuitton-3p/3.jpg',
+      '/products/louis-vuitton-3p/4.jpg',
+    ],
+    features: [
+      '3 pièces : pochette + pouch zip + porte-cartes',
+      '3 coloris empreinte : Rouge · Noir · Rose',
+      'Hardware doré · chaîne bandoulière',
+      'Livraison avec boîtes Louis Vuitton et dust bag',
+    ],
+    reviews: [
+      {
+        name: 'Wafa K.',
+        city: 'الجزائر',
+        initial: 'و',
+        text: '3P كاملة كيما في الصور، Rouge empreinte quality. وصلت مع البوات.',
+      },
+      {
+        name: 'Ilhem M.',
+        city: 'قسنطينة',
+        initial: 'إ',
+        text: 'Noir فاخر، les 3 pièces مع chaîne. اللون من الفورm.',
+      },
+    ],
+  },
+  {
     id: 'louis-vuitton-speedy',
     name: 'Louis Vuitton Speedy (Spidi)',
     collection: 'louis-vuitton',

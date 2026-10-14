@@ -23,6 +23,7 @@ export default function ProductCard({ product, className = '' }: Props) {
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 70vw, 25vw"
+            loading="lazy"
           />
         )}
         {product.badge && (
