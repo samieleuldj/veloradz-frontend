@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { getCollection } from '@/data/collections';
 import type { Product } from '@/data/products';
@@ -15,15 +14,18 @@ export default function ProductCard({ product, className = '' }: Props) {
 
   return (
     <div className={`group bg-cream rounded-2xl overflow-hidden border border-gold/15 hover:shadow-xl transition-shadow flex flex-col ${className}`}>
-      <Link href={`/product/${product.id}`} className="relative block aspect-[4/5] bg-white overflow-hidden">
+      <Link
+        href={`/product/${product.id}`}
+        prefetch
+        className="relative block aspect-[4/5] bg-white overflow-hidden"
+      >
         {cover && (
-          <Image
+          <img
             src={cover}
             alt={product.name}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 70vw, 25vw"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
           />
         )}
         {product.badge && (
@@ -32,7 +34,7 @@ export default function ProductCard({ product, className = '' }: Props) {
           </span>
         )}
         <div className="absolute bottom-3 right-3 w-9 h-9 rounded-full overflow-hidden ring-1 ring-gold/60 bg-cream shadow">
-          <Image src="/brand/ayla-logo.jpg" alt="AYLA BAGS" fill className="object-cover scale-110" sizes="36px" />
+          <img src="/brand/ayla-logo.jpg" alt="AYLA BAGS" className="absolute inset-0 w-full h-full object-cover scale-110" loading="lazy" decoding="async" />
         </div>
       </Link>
 

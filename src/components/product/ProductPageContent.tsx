@@ -79,7 +79,11 @@ export default function ProductPageContent({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-7 space-y-6 order-1">
             {product.images && product.images.length > 0 ? (
-              <ProductGallery images={product.images} productName={product.name} />
+              <ProductGallery
+                productId={product.id}
+                images={product.images}
+                productName={product.name}
+              />
             ) : (
               <div id="product-hero" className="w-full aspect-square bg-white rounded-2xl border border-gray-200 flex items-center justify-center shadow-sm">
                 <span className="text-gray-400 font-medium">صورة المنتج الرئيسية</span>

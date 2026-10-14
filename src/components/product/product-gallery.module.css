@@ -1,0 +1,52 @@
+.galleryInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.slideActive {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #d1d5db;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dotActive {
+  background: var(--color-primary, #111111);
+}
+
+.thumb {
+  cursor: pointer;
+}
+
+.thumbRing {
+  border-color: #e5e7eb;
+}
+
+.thumbRingActive {
+  border-color: var(--color-primary, #111111);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #111111) 30%, transparent);
+}

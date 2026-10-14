@@ -11,7 +11,6 @@ const ExitIntentOffer = dynamic(() => import('@/components/product/ExitIntentOff
   ssr: false,
 });
 import { buildPageMetadata, productJsonLd, siteConfig } from '@/lib/seo';
-import { getProductWithLivePrice } from '@/lib/product-prices';
 
 export const revalidate = 300;
 
@@ -29,14 +28,12 @@ export async function generateMetadata({
     return { title: 'منتج غير موجود' };
   }
 
-  const product = await getProductWithLivePrice(base);
-
   return buildPageMetadata({
-    title: `${product.name} — ${product.price} دج | ${siteConfig.nameAr}`,
-    description: product.description,
-    path: `/product/${product.id}`,
-    image: product.images?.[0],
-    keywords: [product.name, siteConfig.nameAr, 'دفع عند الاستلام', 'حقائب نسائية'],
+    title: `${base.name} — ${base.price} دج | ${siteConfig.nameAr}`,
+    description: base.description,
+    path: `/product/${base.id}`,
+    image: base.images?.[0],
+    keywords: [base.name, siteConfig.nameAr, 'دفع عند الاستلام', 'حقائب نسائية'],
   });
 }
 
@@ -44,7 +41,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
   const base = products.find((p) => p.id === params.id);
   if (!base) notFound();
 
-  const product = await getProductWithLivePrice(base);
+  // Static catalog price on SSR; LiveStorefrontPrices updates client-side (faster navigation).
+  const product = base;
   const reviews = product.reviews?.length ? product.reviews : DEFAULT_REVIEWS;
 
   return (
