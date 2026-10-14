@@ -1,0 +1,17 @@
+EasyPanel bloqué — débloquer (AYLA)
+
+1) Ne déploie PAS frontend + backend en même temps. Attends la fin d’un deploy.
+
+2) ayla-frontend → Ressources → Mémoire: 1024 Mo (min) → Enregistrer → Redémarrer.
+
+3) Déploiements → dernier deploy → si "Building" > 25 min → Annuler → Déployer à nouveau.
+
+4) Logs "Connecting to websocket" = bug UI. Ouvre le site direct:
+   https://veloradz-database-ayla-frontend.ikpdwj.easypanel.host/
+
+5) aylabackend → Domaines → HTTPS + port 8000 → Déployer
+   Test: https://veloradz-database-aylabackend.ikpdwj.easypanel.host/
+
+6) Si tout le panel EasyPanel freeze: redémarre le VPS (hosting) ou attends 10 min.
+
+7) Env frontend (copier depuis easypanel.env) puis Rebuild.

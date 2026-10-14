@@ -5,6 +5,8 @@ const AYLA_API_URL =
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: false },
   async redirects() {
     const adminBase = `${AYLA_API_URL.replace(/\/$/, '')}/admin`;
     return [

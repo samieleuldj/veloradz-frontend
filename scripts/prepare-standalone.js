@@ -35,13 +35,4 @@ fs.mkdirSync(path.dirname(staticDest), { recursive: true });
 copyDir(staticSrc, staticDest);
 copyDir(publicSrc, publicDest);
 
-const standaloneModules = ['sharp', '@img'];
-for (const moduleName of standaloneModules) {
-  const moduleSrc = path.join(root, 'node_modules', moduleName);
-  const moduleDest = path.join(standaloneDir, 'node_modules', moduleName);
-  if (fs.existsSync(moduleSrc)) {
-    copyDir(moduleSrc, moduleDest);
-  }
-}
-
 console.log('Standalone bundle prepared.');

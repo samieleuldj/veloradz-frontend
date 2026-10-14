@@ -1,0 +1,15 @@
+.git
+.github
+.next
+node_modules
+npm-debug.log*
+.env
+.env.*
+!.env.example
+easypanel.env
+EASYPANEL-RECOVER.txt
+*.md
+Dockerfile*
+.dockerignore
+terminals
+.cursor

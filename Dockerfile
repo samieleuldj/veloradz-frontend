@@ -4,13 +4,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && npm install; \
-  fi
+COPY package.json package-lock.json* ./
+RUN npm ci
 
 FROM base AS builder
 WORKDIR /app
@@ -18,19 +13,19 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS=--max-old-space-size=1536
 
 ARG NEXT_PUBLIC_META_PIXEL_ID=1185674394016369
 ARG META_PIXEL_ID=1185674394016369
 ARG NEXT_PUBLIC_API_URL=https://veloradz-database-aylabackend.ikpdwj.easypanel.host
 ARG NEXT_PUBLIC_SITE_URL=https://veloradz-database-ayla-frontend.ikpdwj.easypanel.host
-ARG CACHE_BUST=ayla-bags-v1
+ARG CACHE_BUST=ayla-bags-v2
 ENV CACHE_BUST=$CACHE_BUST
 ENV NEXT_PUBLIC_META_PIXEL_ID=$NEXT_PUBLIC_META_PIXEL_ID
 ENV META_PIXEL_ID=$META_PIXEL_ID
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
-RUN mkdir -p public
 RUN npm run build
 
 FROM base AS runner
@@ -41,16 +36,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-RUN apk add --no-cache libc6-compat
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/sharp ./node_modules/sharp
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@img ./node_modules/@img
 
 USER nextjs
 
